@@ -69,11 +69,30 @@ function load_mailbox(mailbox) {
       emails.forEach(email => {
         let newdiv = document.createElement('div');
         newdiv.data = `${email.id}`;
-        newdiv.innerHTML = `<b>Subject: ${email.subject} | Sender: ${email.sender} | ${email.timestamp}</b>
-        <br> 
-        ${email.body}`;
-        if (email.read) {
+        newdiv.style.display = 'flex';
+        // newdiv.innerHTML = `<b>Subject: ${email.subject} | Sender: ${email.sender} | ${email.timestamp}</b>
+        // <br> 
+        // ${email.body}`;
+        if(email.read) {
           newdiv.style.backgroundColor = '#eee';
+          newdiv.innerHTML = `
+          <div style="display : inline-flex; align-self : center; margin-right: 20px; font-size: 22px"> 
+          <i class="far fa-envelope-open"></i> </div>
+          <div style=""> <b>${email.subject}</b>
+          <br>
+          From: ${email.sender} - ${email.timestamp}
+          </div>
+          `;
+        }
+        else {
+          newdiv.innerHTML = `
+          <div style="display : inline-flex; align-self : center; margin-right: 20px; font-size: 22px"> 
+          <i class="far fa-envelope "></i> </div>
+          <div style=""> <b>${email.subject}</b>
+          <br>
+          From: ${email.sender} - ${email.timestamp}
+          </div>
+          `;
         }
         newdiv.style.border = '1px solid lightgrey';
         newdiv.style.padding = '10px 20px';
@@ -102,13 +121,18 @@ function load_mail(id, mailbox) {
   fetch(`/emails/${id}`)
   .then(response => response.json())
   .then(email => {
-    document.querySelector('#single-email-view').innerHTML = `
-    from: ${email.sender}
-    <br> to: ${email.recipients}
-    <br> date: ${email.timestamp}
-    <br> subject: ${email.subject}
-    <hr>
-    ${email.body} `
+    // document.querySelector('#single-email-view').innerHTML = `
+    // from: ${email.sender}
+    // <br> to: ${email.recipients}
+    // <br> date: ${email.timestamp}
+    // <br> subject: ${email.subject}
+    // <hr>
+    // ${email.body} `;
+    document.querySelector('#senderField').innerHTML = `${email.sender}`;
+    document.querySelector('#receiversField').innerHTML = `${email.recipients}`;
+    document.querySelector('#dateField').innerHTML = `${email.timestamp}`;
+    document.querySelector('#subjectField').innerHTML = `${email.subject}`;
+    document.querySelector('#emailBody').innerHTML = `${email.body}`;
     toggle_read(email.id, true);
     if(mailbox !== 'sent') {
       const buttonRow = document.createElement('div');

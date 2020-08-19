@@ -32,7 +32,26 @@
     </div>
 
     <div id="single-email-view">
-        
+        <div class="emailContainer">
+            <div class="row mx-0">
+                <div class="col-1 text-right">
+                    <div>from:</div>
+                    <div>to:</div>
+                    <div>date:</div>
+                    <div>subject:</div>
+                </div>
+                <div class="col-11 pl-0">
+                    <div id="senderField"></div>
+                    <div id="receiversField"></div>
+                    <div id="dateField"></div>
+                    <div id="subjectField"></div>
+                </div>
+            </div>
+            <hr>
+            <div class="row mx-0">
+                <div class="col" id="emailBody"></div>
+            </div>
+        </div>
     </div>
     
 {% endblock %}
