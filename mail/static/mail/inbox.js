@@ -135,35 +135,36 @@ function load_mail(id, mailbox) {
     document.querySelector('#emailBody').innerHTML = `${email.body}`;
     toggle_read(email.id, true);
     if(mailbox !== 'sent') {
-      const buttonRow = document.createElement('div');
-      buttonRow.className = 'buttonRow';
-      document.querySelector('#single-email-view').append(buttonRow);
-      let readStatusButton = document.createElement('button');
-      let archiveStatusButton = document.createElement('button');
-      let replyButton = document.createElement('button');
-      readStatusButton.className = 'btn btn-primary';
-      readStatusButton.innerHTML = 'Mark Unread';
-      archiveStatusButton.className = 'btn btn-primary';
+      const buttonRow = document.querySelector('.buttonRow');
+      // buttonRow.className = 'buttonRow';
+      // document.querySelector('#single-email-view').append(buttonRow);
+      buttonRow.innerHTML = `
+      <button class="btn btn-primary" id="read">Mark Unread</buttton>
+      <button class="btn btn-primary" id="archive">Archive</button>
+      <button class="btn btn-primary" id="reply">Reply</button>
+      `;
+      let readStatusButton = document.querySelector('#read');
+      let archiveStatusButton = document.querySelector('#archive');
+      let replyButton = document.querySelector('#reply');
       if(mailbox === 'inbox') {
         archiveStatusButton.innerHTML = 'Archive';
       }
       else {
         archiveStatusButton.innerHTML = 'Unarchive';
       }
-      replyButton.className = 'btn btn-primary';
-      replyButton.innerHTML = 'Reply';
-      buttonRow.append(readStatusButton);
-      buttonRow.append(archiveStatusButton); 
-      buttonRow.append(replyButton);
       readStatusButton.addEventListener('click', () => { 
-        toggle_read(email.id, false);
+        toggle_read(email.id, false);;
       });
       if(!email.archived) {
-        archiveStatusButton.addEventListener('click', () => toggle_archive(email.id, true));
+        archiveStatusButton.addEventListener('click', () => {
+          toggle_archive(email.id, true);
+        });
         archiveStatusButton.innerHTML = 'Archive';
       }
       else {
-        archiveStatusButton.addEventListener('click', () => toggle_archive(email.id, false));
+        archiveStatusButton.addEventListener('click', () => {
+          toggle_archive(email.id, false);
+        });
         archiveStatusButton.innerHTML = 'Unarchive';
       }
       replyButton.addEventListener('click', () => {
