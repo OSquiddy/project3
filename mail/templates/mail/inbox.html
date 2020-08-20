@@ -11,10 +11,13 @@
     <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
     <hr>
 
+    <!-- Display a message -->
+    <div id="message" role="alert"></div>
+
     <div id="emails-view">
     </div>
 
-    <div id="compose-view">
+    <div id="compose-view"
         <h3>New Email</h3>
         <form id="compose-form">
             <div class="form-group">
@@ -35,10 +38,10 @@
         <div class="emailContainer">
             <div class="row mx-0">
                 <div class="col-1 text-right">
-                    <div>from:</div>
-                    <div>to:</div>
-                    <div>date:</div>
-                    <div>subject:</div>
+                    <div>From:</div>
+                    <div>To:</div>
+                    <div>Date:</div>
+                    <div>Subject:</div>
                 </div>
                 <div class="col-11 pl-0">
                     <div id="senderField"></div>
